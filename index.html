@@ -1,11 +1,105 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>(9Code)</title>
 
-</body>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+      }
+
+      .wrapper {
+        width: 100vw;
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background: url(./footer-galaxy.webp) no-repeat center center/cover;
+      }
+
+      .wrapper button {
+        padding: 10px 20px;
+        border: none;
+        outline: none;
+        font-family: "Poppins", sans-serif;
+        font-size: large;
+        background-color: #40435c;
+        border-radius: 10px;
+        cursor: pointer;
+        position: relative;
+        overflow: hidden;
+        z-index: 9;
+        transition: all 0.25s linear;
+        box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+        color: #fff;
+      }
+
+      .wrapper button::before {
+        --size: 0;
+        content: "";
+        position: absolute;
+        left: var(--x);
+        top: var(--y);
+        width: var(--size);
+        height: var(--size);
+        background: radial-gradient(
+          circle closest-side,
+          #707d7b97,
+          transparent
+        );
+        transform: translate(-50%, -50%);
+        transition: width 0.2s ease, height 0.2s ease;
+        z-index: -1;
+      }
+
+      .wrapper button:hover::before {
+        --size: 200px;
+      }
+    </style>
+    <div class="wrapper">
+      <div style="display: flex; gap: 10px">
+        <button>On mouse move</button>
+        <button>On mouse move</button>
+      </div>
+      <div>
+        <img src="./astrocat.png" alt="" />
+      </div>
+    </div>
+    <script>
+      (function () {
+        ("use strict");
+        const addHoverEffects = (button) => {
+          button.addEventListener("mousemove", (e) => {
+            const x = e.pageX - button.offsetLeft;
+            const y = e.pageY - button.offsetTop;
+            button.style.setProperty("--x", `${x}px`);
+            button.style.setProperty("--y", `${y}px`);
+            button.style.setProperty("transform", "rotate(-4deg)");
+            button.style.setProperty("transform-origin", "15%");
+          });
+
+          button.addEventListener("mouseleave", () => {
+            button.style.setProperty("--x", "0");
+            button.style.setProperty("--y", "0");
+            button.style.setProperty("transform", "rotate(0)");
+            button.style.setProperty("transform-origin", "center");
+          });
+        };
+
+        const buttons = document.querySelectorAll("button");
+        buttons.forEach(addHoverEffects);
+      })();
+    </script>
+  </body>
 </html>
